@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://dabaehbquawic"]
+
+[ext_resource type="PackedScene" uid="uid://bd3ai1v40ssao" path="res://map.tscn" id="1_tf6g5"]
+[ext_resource type="Script" uid="uid://cxp1f4pd3clyt" path="res://scripts/map.gd" id="1_vytxi"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_r06yd"]
+energy_multiplier = 1.25
+
+[sub_resource type="Sky" id="Sky_78err"]
+sky_material = SubResource("PhysicalSkyMaterial_r06yd")
+
+[sub_resource type="Environment" id="Environment_v7lsv"]
+background_mode = 2
+sky = SubResource("Sky_78err")
+tonemap_mode = 2
+tonemap_white = 6.0
+ssao_enabled = true
+glow_blend_mode = 4
+fog_enabled = true
+fog_sun_scatter = 0.17
+fog_density = 0.0099
+fog_aerial_perspective = 1.0
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_wntx8"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_vytxi"]
+
+[node name="Shipment" type="Node" unique_id=58379565]
+script = ExtResource("1_vytxi")
+metadata/_custom_type_script = "uid://cxp1f4pd3clyt"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1357606402]
+environment = SubResource("Environment_v7lsv")
+camera_attributes = SubResource("CameraAttributesPractical_wntx8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1855200436]
+transform = Transform3D(-0.8358073, -0.4701105, 0.28358814, -0.37594414, 0.8664961, 0.32840607, -0.40011516, 0.16787088, -0.9009591, 0, 4.88489, 0)
+light_temperature = 4300.0
+light_energy = 5.0
+shadow_enabled = true
+shadow_bias = 0.0
+directional_shadow_split_1 = 0.04
+directional_shadow_split_2 = 0.11
+directional_shadow_split_3 = 0.33
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 99.3
+
+[node name="geo" parent="." unique_id=1725952023 instance=ExtResource("1_tf6g5")]
+
+[node name="spawns" type="Node" parent="." unique_id=1150012966]
+
+[node name="Marker3D" type="Marker3D" parent="spawns" unique_id=886674013]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15, 0, 7)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D" unique_id=1256507659]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_vytxi")
+
+[node name="Marker3D2" type="Marker3D" parent="spawns" unique_id=826531839]
+transform = Transform3D(0.49999997, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, 0.49999997, 17, 0, -6)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D2" unique_id=1352740406]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_vytxi")
+
+[node name="Marker3D3" type="Marker3D" parent="spawns" unique_id=1776438935]
+transform = Transform3D(-0.7071067, 0, 0.7071068, 0, 1, 0, -0.7071068, 0, -0.7071067, 18, 0, -18)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D3" unique_id=1717232536]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_vytxi")
+
+[node name="Marker3D4" type="Marker3D" parent="spawns" unique_id=1801736662]
+transform = Transform3D(-0.9659258, 0, -0.25881913, 0, 1, 0, 0.25881913, 0, -0.9659258, 5, 0, -18)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D4" unique_id=931062653]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_vytxi")
+
+[node name="Marker3D5" type="Marker3D" parent="spawns" unique_id=68467280]
+transform = Transform3D(-0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, -0.70710677, -7, 0, -18)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D5" unique_id=1201089833]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_vytxi")
+
+[node name="Marker3D6" type="Marker3D" parent="spawns" unique_id=1655914410]
+transform = Transform3D(-0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, -0.70710677, -17, 0, -18)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D6" unique_id=1556550224]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_vytxi")
+
+[node name="Marker3D7" type="Marker3D" parent="spawns" unique_id=1648800039]
+transform = Transform3D(0.49999997, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, 0.49999997, -18, 0, -7)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D7" unique_id=805703151]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_vytxi")
+
+[node name="Marker3D8" type="Marker3D" parent="spawns" unique_id=19964461]
+transform = Transform3D(-0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, -0.70710677, -19, 0, 5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D8" unique_id=1097229024]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_vytxi")
+
+[node name="Marker3D9" type="Marker3D" parent="spawns" unique_id=529312123]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -15, 0, 16)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D9" unique_id=1620339484]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_vytxi")
+
+[node name="Marker3D10" type="Marker3D" parent="spawns" unique_id=748624038]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 19)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D10" unique_id=1779275664]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_vytxi")
+
+[node name="Marker3D11" type="Marker3D" parent="spawns" unique_id=1688323676]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 4, 0, 18)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D11" unique_id=2013339869]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_vytxi")
+
+[node name="Marker3D12" type="Marker3D" parent="spawns" unique_id=168825065]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D12" unique_id=182970592]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_vytxi")
+
+[node name="Marker3D13" type="Marker3D" parent="spawns" unique_id=1475387631]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -8)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D13" unique_id=1918886393]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_vytxi")
+
+[editable path="geo"]

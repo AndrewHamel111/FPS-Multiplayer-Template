@@ -6,12 +6,15 @@ extends Node
 @onready var address_entry: LineEdit = %AddressEntry
 @onready var menu_music: AudioStreamPlayer = %MenuMusic
 
-const Player = preload("res://player.tscn")
+const PlayerScene = preload("res://player.tscn")
 const PORT = 9999
+const PLAYER_HEALTH_DEFAULT = 2
 var enet_peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 var paused: bool = false
 var options: bool = false
 var controller: bool = false
+
+@onready var current_level := $Map.get_child(0) as Map
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_pressed("pause") and !main_menu.visible and !options_menu.visible:
@@ -94,9 +97,11 @@ func _on_music_toggle_toggled(toggled_on: bool) -> void:
 		menu_music.play()
 
 func add_player(peer_id: int) -> void:
-	var player: Node = Player.instantiate()
+	var player: Player = PlayerScene.instantiate()
 	player.name = str(peer_id)
 	add_child(player)
+	player.on_death.connect(_on_player_death)
+	_on_player_death(player)
 
 func remove_player(peer_id: int) -> void:
 	var player: Node = get_node_or_null(str(peer_id))
@@ -114,3 +119,15 @@ func upnp_setup() -> void:
 		print("Failed to establish upnp connection!")
 	else:
 		print("Success! Join Address: %s" % upnp.query_external_address())
+
+func get_player_spawn() -> Node3D:
+	if not current_level:
+		return null
+	
+	return current_level.spawns.pick_random() as Node3D
+
+func _on_player_death(player: Player) -> void:
+	player.health = PLAYER_HEALTH_DEFAULT
+	var spawn := get_player_spawn()
+	player.position = spawn.position
+	player.rotation = spawn.rotation

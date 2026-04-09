@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://csapu6gqkjym8"]
+
+[ext_resource type="PackedScene" uid="uid://c03yippmxxlvr" path="res://imports/map2.glb" id="1_pw0un"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_r06yd"]
+energy_multiplier = 1.25
+
+[sub_resource type="Sky" id="Sky_78err"]
+sky_material = SubResource("PhysicalSkyMaterial_r06yd")
+
+[sub_resource type="Environment" id="Environment_v7lsv"]
+background_mode = 2
+sky = SubResource("Sky_78err")
+tonemap_mode = 2
+tonemap_white = 6.0
+ssao_enabled = true
+glow_blend_mode = 4
+fog_enabled = true
+fog_sun_scatter = 0.17
+fog_density = 0.0099
+fog_aerial_perspective = 1.0
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_wntx8"]
+
+[node name="Nuketown" type="Node" unique_id=1969225845]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1357606402]
+environment = SubResource("Environment_v7lsv")
+camera_attributes = SubResource("CameraAttributesPractical_wntx8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1855200436]
+transform = Transform3D(-0.8358073, -0.4701105, 0.28358814, -0.37594414, 0.8664961, 0.32840607, -0.40011516, 0.16787088, -0.9009591, 0, 4.88489, 0)
+light_temperature = 4300.0
+light_energy = 5.0
+shadow_enabled = true
+shadow_bias = 0.0
+directional_shadow_split_1 = 0.04
+directional_shadow_split_2 = 0.11
+directional_shadow_split_3 = 0.33
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 99.3
+
+[node name="map2" parent="." unique_id=848546036 instance=ExtResource("1_pw0un")]

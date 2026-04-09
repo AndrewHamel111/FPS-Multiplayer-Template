@@ -1,42 +1,22 @@
-[gd_scene load_steps=23 format=3 uid="uid://b57uspbprxc8"]
+[gd_scene format=3 uid="uid://b57uspbprxc8"]
 
-[ext_resource type="Script" path="res://scripts/world.gd" id="1_ho7yh"]
-[ext_resource type="PackedScene" uid="uid://bd3ai1v40ssao" path="res://map.tscn" id="3_fd0sg"]
-[ext_resource type="Script" path="res://scripts/ui/fps_counter.gd" id="4_2328u"]
-[ext_resource type="Script" path="res://scripts/ui/menu/host_button.gd" id="4_nuahp"]
-[ext_resource type="Shader" path="res://scripts/shaders/blur.gdshader" id="4_p7mxg"]
+[ext_resource type="Script" uid="uid://bd81ysdlqd6oy" path="res://scripts/world.gd" id="1_ho7yh"]
+[ext_resource type="Script" uid="uid://chl816vkrpda8" path="res://scripts/ui/fps_counter.gd" id="4_2328u"]
+[ext_resource type="Script" uid="uid://0f8ss4ubnuwj" path="res://scripts/ui/menu/host_button.gd" id="4_nuahp"]
+[ext_resource type="Shader" uid="uid://b6ayymrhkylhq" path="res://scripts/shaders/blur.gdshader" id="4_p7mxg"]
 [ext_resource type="AudioStream" uid="uid://p6uvqtljqic7" path="res://audio/661248__magmadiverrr__video-game-menu-music.ogg" id="4_taatn"]
-[ext_resource type="Script" path="res://scripts/ui/menu/options/fullscreen.gd" id="5_abwkb"]
-[ext_resource type="Script" path="res://scripts/ui/menu/options/mouse_sensitivity.gd" id="6_00vww"]
-[ext_resource type="Script" path="res://scripts/ui/menu/options/back.gd" id="6_2hany"]
-[ext_resource type="Script" path="res://scripts/ui/menu/options_button.gd" id="6_7g7sm"]
-[ext_resource type="Script" path="res://scripts/ui/menu/pause/resume.gd" id="7_5cdyw"]
-[ext_resource type="Script" path="res://scripts/ui/menu/options/controller_sensitivity.gd" id="7_jhf7u"]
-[ext_resource type="Script" path="res://scripts/ui/menu/pause/quit.gd" id="9_ucmny"]
-
-[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_r06yd"]
-energy_multiplier = 1.25
-
-[sub_resource type="Sky" id="Sky_78err"]
-sky_material = SubResource("PhysicalSkyMaterial_r06yd")
-
-[sub_resource type="Environment" id="Environment_v7lsv"]
-background_mode = 2
-sky = SubResource("Sky_78err")
-tonemap_mode = 2
-tonemap_white = 6.0
-ssao_enabled = true
-glow_blend_mode = 4
-fog_enabled = true
-fog_sun_scatter = 0.17
-fog_density = 0.0099
-fog_aerial_perspective = 1.0
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_wntx8"]
+[ext_resource type="Script" uid="uid://dcoocqnfhag40" path="res://scripts/ui/menu/options/fullscreen.gd" id="5_abwkb"]
+[ext_resource type="Script" uid="uid://b8g8fngpp1cld" path="res://scripts/ui/menu/options/mouse_sensitivity.gd" id="6_00vww"]
+[ext_resource type="Script" uid="uid://co76seoupgayb" path="res://scripts/ui/menu/options/back.gd" id="6_2hany"]
+[ext_resource type="Script" uid="uid://dfglxfci03w2h" path="res://scripts/ui/menu/options_button.gd" id="6_7g7sm"]
+[ext_resource type="Script" uid="uid://du5qtfmm8p5du" path="res://scripts/ui/menu/pause/resume.gd" id="7_5cdyw"]
+[ext_resource type="Script" uid="uid://bmy1ha2maxmwg" path="res://scripts/ui/menu/options/controller_sensitivity.gd" id="7_jhf7u"]
+[ext_resource type="Script" uid="uid://o3k14mw74n81" path="res://scripts/ui/menu/pause/quit.gd" id="9_ucmny"]
+[ext_resource type="PackedScene" uid="uid://dabaehbquawic" path="res://maps/shipment.tscn" id="13_2o6r5"]
 
 [sub_resource type="Animation" id="Animation_ug7wi"]
 resource_name = "Dolly"
-length = 120.0
+length = 40.0
 loop_mode = 1
 tracks/0/type = "bezier"
 tracks/0/imported = false
@@ -46,8 +26,8 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(0.659, -0.25, 0, 0.25, 0, -14.157, -0.25, 0, 0.25, 0, 13.2434, -0.25, 0, 0.25, 0, 0.659, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 30.0667, 89.9333, 120)
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 10, 30, 40)
 }
 
 [sub_resource type="Animation" id="Animation_ei2s0"]
@@ -66,61 +46,41 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lekn2"]
 _data = {
-"Dolly": SubResource("Animation_ug7wi"),
-"RESET": SubResource("Animation_ei2s0")
+&"Dolly": SubResource("Animation_ug7wi"),
+&"RESET": SubResource("Animation_ei2s0")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nou27"]
 shader = ExtResource("4_p7mxg")
 shader_parameter/blur_amount = 2.0
 shader_parameter/mix_amount = 0.0
-shader_parameter/color_over = null
+shader_parameter/color_over = Color(0, 0, 0, 1)
 
 [sub_resource type="Theme" id="Theme_utqnk"]
 
-[node name="World" type="Node"]
+[node name="World" type="Node" unique_id=1564087886]
 script = ExtResource("1_ho7yh")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_v7lsv")
-camera_attributes = SubResource("CameraAttributesPractical_wntx8")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.835807, -0.47011, 0.283589, -0.375944, 0.866496, 0.328406, -0.400115, 0.167871, -0.900959, 0, 4.88489, 0)
-light_temperature = 4300.0
-light_energy = 5.0
-shadow_enabled = true
-shadow_bias = 0.0
-directional_shadow_split_1 = 0.04
-directional_shadow_split_2 = 0.11
-directional_shadow_split_3 = 0.33
-directional_shadow_blend_splits = true
-directional_shadow_max_distance = 99.3
-
-[node name="FpsCounter" type="Label" parent="."]
+[node name="FpsCounter" type="Label" parent="." unique_id=433310222]
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("4_2328u")
 
-[node name="map" parent="." instance=ExtResource("3_fd0sg")]
+[node name="Menu" type="CanvasLayer" parent="." unique_id=1159263600]
 
-[node name="Menu" type="CanvasLayer" parent="."]
-
-[node name="MenuMusic" type="AudioStreamPlayer" parent="Menu"]
+[node name="MenuMusic" type="AudioStreamPlayer" parent="Menu" unique_id=2062837623]
 unique_name_in_owner = true
 stream = ExtResource("4_taatn")
 volume_db = -20.0
 autoplay = true
 bus = &"Music"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu" unique_id=187008956]
 root_node = NodePath("../Blur")
-libraries = {
-"": SubResource("AnimationLibrary_lekn2")
-}
-autoplay = "Dolly"
+libraries/ = SubResource("AnimationLibrary_lekn2")
+autoplay = &"Dolly"
 
-[node name="Blur" type="ColorRect" parent="Menu"]
+[node name="Blur" type="ColorRect" parent="Menu" unique_id=1170544923]
 material = SubResource("ShaderMaterial_nou27")
 anchors_preset = 15
 anchor_right = 1.0
@@ -128,10 +88,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DollyCamera" type="Camera3D" parent="Menu"]
+[node name="DollyCamera" type="Camera3D" parent="Menu" unique_id=1652996859]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0.702964, 13.2434)
 
-[node name="Options" type="PanelContainer" parent="Menu"]
+[node name="Options" type="PanelContainer" parent="Menu" unique_id=2084445458]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 13
@@ -144,55 +104,55 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_utqnk")
 
-[node name="MarginContainer" type="MarginContainer" parent="Menu/Options"]
+[node name="MarginContainer" type="MarginContainer" parent="Menu/Options" unique_id=706896518]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/Options/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/Options/MarginContainer" unique_id=627543877]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 10
 
-[node name="OptionsLabel" type="Label" parent="Menu/Options/MarginContainer/VBoxContainer"]
+[node name="OptionsLabel" type="Label" parent="Menu/Options/MarginContainer/VBoxContainer" unique_id=311408467]
 layout_mode = 2
 text = "Options
 "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Fullscreen" type="CheckButton" parent="Menu/Options/MarginContainer/VBoxContainer"]
+[node name="Fullscreen" type="CheckButton" parent="Menu/Options/MarginContainer/VBoxContainer" unique_id=2036545883]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Fullscreen"
 script = ExtResource("5_abwkb")
 
-[node name="FpsCounter" type="CheckButton" parent="Menu/Options/MarginContainer/VBoxContainer"]
+[node name="FpsCounter" type="CheckButton" parent="Menu/Options/MarginContainer/VBoxContainer" unique_id=103571837]
 layout_mode = 2
 text = "FPS counter"
 
-[node name="Ping" type="CheckButton" parent="Menu/Options/MarginContainer/VBoxContainer"]
+[node name="Ping" type="CheckButton" parent="Menu/Options/MarginContainer/VBoxContainer" unique_id=6026900]
 layout_mode = 2
 tooltip_text = "Shows connection trip time to host (in milliseconds)"
 text = "View Ping"
 
-[node name="SensitivityLabel" type="Label" parent="Menu/Options/MarginContainer/VBoxContainer"]
+[node name="SensitivityLabel" type="Label" parent="Menu/Options/MarginContainer/VBoxContainer" unique_id=2076438478]
 layout_mode = 2
 text = "Sensitivity"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Menu/Options/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/Options/MarginContainer/VBoxContainer" unique_id=1283972430]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Menu/Options/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Menu/Options/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1691842719]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Mouse sensitivity"
 
-[node name="MouseSensitivity" type="HSlider" parent="Menu/Options/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="MouseSensitivity" type="HSlider" parent="Menu/Options/MarginContainer/VBoxContainer/HBoxContainer" unique_id=483847250]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -202,30 +162,30 @@ step = 0.001
 value = 0.005
 script = ExtResource("6_00vww")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Menu/Options/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Menu/Options/MarginContainer/VBoxContainer" unique_id=1307128904]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Menu/Options/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="Menu/Options/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1170513169]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Controller sensitivity"
 
-[node name="ControllerSensitivity" type="HSlider" parent="Menu/Options/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="ControllerSensitivity" type="HSlider" parent="Menu/Options/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1584984312]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 min_value = 0.001
 max_value = 0.1
 step = 0.001
-value = 0.01
+value = 0.009999999999999998
 script = ExtResource("7_jhf7u")
 
-[node name="Back" type="Button" parent="Menu/Options/MarginContainer/VBoxContainer"]
+[node name="Back" type="Button" parent="Menu/Options/MarginContainer/VBoxContainer" unique_id=28959854]
 layout_mode = 2
 text = "Back"
 script = ExtResource("6_2hany")
 
-[node name="PauseMenu" type="PanelContainer" parent="Menu"]
+[node name="PauseMenu" type="PanelContainer" parent="Menu" unique_id=921500174]
 visible = false
 anchors_preset = 13
 anchor_left = 0.5
@@ -236,96 +196,96 @@ offset_right = 180.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Menu/PauseMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="Menu/PauseMenu" unique_id=1265229637]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/PauseMenu/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/PauseMenu/MarginContainer" unique_id=1668851487]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 10
 
-[node name="PauseLabel" type="Label" parent="Menu/PauseMenu/MarginContainer/VBoxContainer"]
+[node name="PauseLabel" type="Label" parent="Menu/PauseMenu/MarginContainer/VBoxContainer" unique_id=1664668146]
 layout_mode = 2
 text = "Pause Menu
 "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Resume" type="Button" parent="Menu/PauseMenu/MarginContainer/VBoxContainer"]
+[node name="Resume" type="Button" parent="Menu/PauseMenu/MarginContainer/VBoxContainer" unique_id=667824949]
 layout_mode = 2
 text = "Resume"
 script = ExtResource("7_5cdyw")
 
-[node name="Options" type="Button" parent="Menu/PauseMenu/MarginContainer/VBoxContainer"]
+[node name="Options" type="Button" parent="Menu/PauseMenu/MarginContainer/VBoxContainer" unique_id=1448268485]
 layout_mode = 2
 text = "Options
 "
 
-[node name="Quit" type="Button" parent="Menu/PauseMenu/MarginContainer/VBoxContainer"]
+[node name="Quit" type="Button" parent="Menu/PauseMenu/MarginContainer/VBoxContainer" unique_id=918461041]
 layout_mode = 2
 text = "Quit"
 script = ExtResource("9_ucmny")
 
-[node name="MainMenu" type="PanelContainer" parent="Menu"]
+[node name="MainMenu" type="PanelContainer" parent="Menu" unique_id=1988031822]
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 391.0
 grow_vertical = 2
 theme = SubResource("Theme_utqnk")
 
-[node name="MarginContainer" type="MarginContainer" parent="Menu/MainMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="Menu/MainMenu" unique_id=217099956]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MainMenu/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MainMenu/MarginContainer" unique_id=705228780]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 10
 
-[node name="MainMenuLabel" type="Label" parent="Menu/MainMenu/MarginContainer/VBoxContainer"]
+[node name="MainMenuLabel" type="Label" parent="Menu/MainMenu/MarginContainer/VBoxContainer" unique_id=1105449434]
 layout_mode = 2
 text = "Main Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HostButton" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer"]
+[node name="HostButton" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer" unique_id=2146500030]
 layout_mode = 2
 text = "Host"
 script = ExtResource("4_nuahp")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Menu/MainMenu/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/MainMenu/MarginContainer/VBoxContainer" unique_id=1105182084]
 layout_mode = 2
 
-[node name="AddressEntry" type="LineEdit" parent="Menu/MainMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="AddressEntry" type="LineEdit" parent="Menu/MainMenu/MarginContainer/VBoxContainer/HBoxContainer" unique_id=687753941]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Enter Address Here to join"
 alignment = 1
 
-[node name="JoinButton" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="JoinButton" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2049962251]
 layout_mode = 2
 text = "  Join  "
 
-[node name="OptionsButton" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer" unique_id=682399032]
 layout_mode = 2
 toggle_mode = true
 text = "Options"
 script = ExtResource("6_7g7sm")
 
-[node name="Quit" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer"]
+[node name="Quit" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer" unique_id=406382700]
 layout_mode = 2
 text = "Quit"
 script = ExtResource("9_ucmny")
 
-[node name="MusicToggle" type="CheckButton" parent="Menu/MainMenu"]
+[node name="MusicToggle" type="CheckButton" parent="Menu/MainMenu" unique_id=568067862]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -333,9 +293,13 @@ size_flags_vertical = 8
 button_pressed = true
 text = "Music"
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://player.tscn")
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=504832954]
+_spawnable_scenes = PackedStringArray("uid://b2qhxdrnviyqf")
 spawn_path = NodePath("..")
+
+[node name="Map" type="Node" parent="." unique_id=8076072]
+
+[node name="Shipment" parent="Map" unique_id=1969225845 instance=ExtResource("13_2o6r5")]
 
 [connection signal="toggled" from="Menu/Options/MarginContainer/VBoxContainer/FpsCounter" to="FpsCounter" method="_on_fps_counter_toggled"]
 [connection signal="toggled" from="Menu/Options/MarginContainer/VBoxContainer/Ping" to="FpsCounter" method="_on_ping_toggled"]
@@ -351,5 +315,3 @@ spawn_path = NodePath("..")
 [connection signal="toggled" from="Menu/MainMenu/MarginContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_toggled"]
 [connection signal="toggled" from="Menu/MainMenu/MarginContainer/VBoxContainer/OptionsButton" to="Menu/Options/MarginContainer/VBoxContainer/Fullscreen" method="_on_options_button_toggled"]
 [connection signal="toggled" from="Menu/MainMenu/MusicToggle" to="." method="_on_music_toggle_toggled"]
-
-[editable path="map"]

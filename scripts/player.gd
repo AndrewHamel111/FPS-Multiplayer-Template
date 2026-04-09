@@ -1,4 +1,7 @@
+class_name Player
 extends CharacterBody3D
+
+signal on_death(player: Player)
 
 @onready var camera: Camera3D = $Camera3D
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
@@ -8,16 +11,6 @@ extends CharacterBody3D
 
 ## Number of shots before a player dies
 @export var health : int = 2
-## The xyz position of the random spawns, you can add as many as you want!
-@export var spawns: PackedVector3Array = ([
-	Vector3(-18, 0.2, 0),
-	Vector3(18, 0.2, 0),
-	Vector3(-2.8, 0.2, -6),
-	Vector3(-17,0,17),
-	Vector3(17,0,17),
-	Vector3(17,0,-17),
-	Vector3(-17,0,-17)
-])
 var sensitivity : float =  .005
 var controller_sensitivity : float =  .010
 
@@ -35,7 +28,6 @@ func _ready() -> void:
 
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	camera.current = true
-	position = spawns[randi() % spawns.size()]
 
 func _process(_delta: float) -> void:
 	sensitivity = Global.sensitivity
@@ -116,8 +108,7 @@ func play_shoot_effects() -> void:
 func recieve_damage(damage:= 1) -> void:
 	health -= damage
 	if health <= 0:
-		health = 2
-		position = spawns[randi() % spawns.size()]
+		on_death.emit(self)
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "shoot":
