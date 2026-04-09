@@ -1,3 +1,19 @@
+This repo represents an effort to improve the Multiplayer Template which I learned Godot Multiplayer in order to mirror some of the improvements I expect any other ordinary user would need to make. These changes will include basic usability improvements as well as expanding the capabilities of the template with crucial refactors. I've been working on a project which started with this template, and I have had to make many of these changes in my own project, so I felt it was only fair to make these kinds of improvements public. Below is a basic outline of what sorts of changes are planned. More to come.
+
+- [ ] Save User Preferences (sensitivity, whether to use UPNP, other new game options to be added)
+- [ ] Text Based Game Chat
+- [ ] Pre-game Lobby
+- [ ] Controller Improvements (aim assist / aim magnetism)
+- [ ] Server-side Map Loading (host can choose map, clients independently load map)
+- [ ] Player Identity
+- [ ] Scoreboard
+- [ ] Basic Weapon Definitions
+- [ ] Server-side Game Rules (Player health, Timed vs Score gameplay, weapon exclusions)
+
+The nature of some of these changes obviously push this template further from being as widely reusable as the original template, however some of the refactors which are included are absolutely necessary to be able to build a game with any sort of depth or feature set.
+
+Below is the original README for the template.
+
 <p align="center">
   <img src="https://github.com/user-attachments/assets/38561c4c-d22c-4d7d-9dc2-8fd8de6a8f66" alt="FPS multiplayer template screenshot" />
 </p>
