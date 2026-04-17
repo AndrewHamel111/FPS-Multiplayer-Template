@@ -6,4 +6,5 @@ enum
 	OPTIONS,
 	PAUSE,
 	LOBBY,
+	LOADING,
 }

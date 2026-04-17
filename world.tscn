@@ -72,6 +72,9 @@ font_color = Color(0.5649617, 0.5649616, 0.5649616, 1)
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_2u3nc"]
+font_size = 24
+
 [node name="World" type="Node" unique_id=1564087886]
 script = ExtResource("1_ho7yh")
 
@@ -575,6 +578,24 @@ layout_mode = 2
 text = "Start Match"
 script = ExtResource("4_nuahp")
 
+[node name="LoadingMenu" type="PanelContainer" parent="Menu" unique_id=1793314295]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("14_2u3nc")
+metadata/_custom_type_script = "uid://bwm26r6vbt68o"
+
+[node name="Label" type="Label" parent="Menu/LoadingMenu" unique_id=530942914]
+layout_mode = 2
+text = "LOADING"
+label_settings = SubResource("LabelSettings_2u3nc")
+horizontal_alignment = 1
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=504832954]
 _spawnable_scenes = PackedStringArray("uid://b2qhxdrnviyqf")
 spawn_path = NodePath("..")
@@ -594,3 +615,4 @@ spawn_path = NodePath("..")
 [connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/HostButton" to="Menu" method="_on_host_button_pressed"]
 [connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/HBoxContainer/JoinButton" to="Menu" method="_on_join_button_pressed"]
 [connection signal="toggled" from="Menu/MainMenu/MusicToggle" to="." method="_on_music_toggle_toggled"]
+[connection signal="pressed" from="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HostButton" to="Menu/LobbyMenu" method="_on_start_match_pressed"]

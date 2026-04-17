@@ -27,6 +27,7 @@ func _ready() -> void:
 	menu_manager.host_pressed.connect(_on_host_button_pressed)
 	menu_manager.join_pressed.connect(join_game)
 	menu_manager.pause_state_changed.connect(set_pause)
+	menu_manager.lobby.start_game.connect(start_game)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_pressed("pause"):
@@ -73,6 +74,9 @@ func start_game() -> void:
 	state = GameState.STARTING
 	# TODO: for each user, append their peer id to this list
 	loading_players = []
+	for user in get_player_list():
+		loading_players.push_back(user.get_name().to_int())
+	_prepare_client.rpc()
 
 #func _on_join_button_pressed() -> void:
 func join_game(address: String) -> void:
@@ -105,11 +109,12 @@ func get_player_list() -> Array[User]:
 
 @rpc("any_peer", "call_local", "reliable")
 func _prepare_client() -> void:
-	# TODO: show loading screen
+	menu_manager.show_menu(Menu.LOADING)
 	# TODO: check "game configuration" object synced in tree for following information
 	# game rules
 	# game map
-	# load map
+	
+	# TODO: load map
 	# tell the server when loading is done
 	get_tree().create_timer(randf_range(1.5, 5.0)).timeout.connect(_on_client_loading_complete)
 
@@ -124,12 +129,14 @@ func _client_finished_loading(peer_id: int) -> void:
 		finally_start_game()
 
 func finally_start_game() -> void:
-	# TODO: for each user, add a player
-	#add_player(multiplayer.get_unique_id())
-	# TODO: alert all clients the game has finally started:
-	# hide loading screen
+	for user in get_player_list():
+		add_player(user.get_name().to_int())
+	_on_start_game.rpc()
+
+@rpc("any_peer", "call_local", "reliable")
+func _on_start_game() -> void:
+	menu_manager.hide_all()
 	# play game started sting / chime / music
-	pass
 
 #func _on_music_toggle_toggled(toggled_on: bool) -> void:
 	#if !toggled_on:

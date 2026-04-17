@@ -10,6 +10,7 @@ signal pause_state_changed(is_paused: bool)
 	Menu.OPTIONS: $Options,
 	Menu.PAUSE: $PauseMenu,
 	Menu.LOBBY: $LobbyMenu,
+	Menu.LOADING: $LoadingMenu
 }
 
 @onready var blur : ColorRect = $Blur

@@ -1,6 +1,8 @@
 class_name LobbyManager
 extends PanelContainer
 
+signal start_game
+
 @onready var name_scene: PackedScene = load("res://scenes/ui/lobby/name.tscn")
 
 @onready var player_list: VBoxContainer = $HBoxContainer/MarginContainer/VBoxContainer/PlayerList/MarginContainer2/VBoxContainer
@@ -40,3 +42,6 @@ func set_player_list(players: Array[User]) -> void:
 		var label := name_scene.instantiate()
 		label.set_text(player.username)
 		player_list.add_child(label)
+
+func _on_start_match_pressed() -> void:
+	start_game.emit()
