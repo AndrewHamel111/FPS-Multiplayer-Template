@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://b6s7471e60eqr"]
+
+[ext_resource type="Script" uid="uid://2iuj62sky1ur" path="res://scenes/networking/user.gd" id="1_jvsto"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mfi02"]
+properties/0/path = NodePath(".:username")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="User" type="Node" unique_id=907324813]
+script = ExtResource("1_jvsto")
+metadata/_custom_type_script = "uid://2iuj62sky1ur"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1561118794]
+replication_config = SubResource("SceneReplicationConfig_mfi02")

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b57uspbprxc8"]
 
 [ext_resource type="Script" uid="uid://bd81ysdlqd6oy" path="res://scripts/world.gd" id="1_ho7yh"]
+[ext_resource type="Script" uid="uid://b2cc1l4mkxsw5" path="res://scripts/ui/menu/menu_manager.gd" id="3_hiqwa"]
 [ext_resource type="Script" uid="uid://chl816vkrpda8" path="res://scripts/ui/fps_counter.gd" id="4_2328u"]
 [ext_resource type="Script" uid="uid://0f8ss4ubnuwj" path="res://scripts/ui/menu/host_button.gd" id="4_nuahp"]
 [ext_resource type="Shader" uid="uid://b6ayymrhkylhq" path="res://scripts/shaders/blur.gdshader" id="4_p7mxg"]
@@ -14,6 +15,7 @@
 [ext_resource type="Script" uid="uid://o3k14mw74n81" path="res://scripts/ui/menu/pause/quit.gd" id="9_ucmny"]
 [ext_resource type="PackedScene" uid="uid://dabaehbquawic" path="res://maps/shipment.tscn" id="13_2o6r5"]
 [ext_resource type="Texture2D" uid="uid://kpu3a8umkw1u" path="res://maps/shipment_preview.png" id="13_70uel"]
+[ext_resource type="Script" uid="uid://bwm26r6vbt68o" path="res://scripts/ui/menu/lobby.gd" id="14_2u3nc"]
 
 [sub_resource type="Animation" id="Animation_ug7wi"]
 resource_name = "Dolly"
@@ -73,12 +75,20 @@ outline_color = Color(0, 0, 0, 1)
 [node name="World" type="Node" unique_id=1564087886]
 script = ExtResource("1_ho7yh")
 
+[node name="UserSpawner" type="MultiplayerSpawner" parent="." unique_id=565318382]
+_spawnable_scenes = PackedStringArray("uid://b6s7471e60eqr")
+spawn_path = NodePath("../Users")
+
+[node name="Users" type="Node" parent="." unique_id=563358028]
+
 [node name="FpsCounter" type="Label" parent="." unique_id=433310222]
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("4_2328u")
 
-[node name="Menu" type="CanvasLayer" parent="." unique_id=1159263600]
+[node name="Menu" type="CanvasLayer" parent="." unique_id=574600361]
+script = ExtResource("3_hiqwa")
+metadata/_custom_type_script = "uid://b2cc1l4mkxsw5"
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="Menu" unique_id=2062837623]
 unique_name_in_owner = true
@@ -267,6 +277,35 @@ text = "Main Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="Menu/MainMenu/MarginContainer/VBoxContainer" unique_id=589011606]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/MainMenu/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1478189086]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_right = 16
+
+[node name="MainMenuLabel2" type="Label" parent="Menu/MainMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer" unique_id=721864729]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Name"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="NameEntry" type="LineEdit" parent="Menu/MainMenu/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=704146936]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+text = "Player"
+max_length = 16
+
+[node name="OptionsButton" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer" unique_id=682399032]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Options"
+script = ExtResource("6_7g7sm")
+
 [node name="HostButton" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer" unique_id=2146500030]
 layout_mode = 2
 text = "Host"
@@ -279,18 +318,13 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+text = "localhost"
 placeholder_text = "Enter Address Here to join"
 alignment = 1
 
 [node name="JoinButton" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2049962251]
 layout_mode = 2
 text = "  Join  "
-
-[node name="OptionsButton" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer" unique_id=682399032]
-layout_mode = 2
-toggle_mode = true
-text = "Options"
-script = ExtResource("6_7g7sm")
 
 [node name="Quit" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer" unique_id=406382700]
 layout_mode = 2
@@ -305,7 +339,7 @@ size_flags_vertical = 8
 button_pressed = true
 text = "Music"
 
-[node name="LobbyMenu" type="PanelContainer" parent="Menu" unique_id=899470344]
+[node name="LobbyMenu" type="PanelContainer" parent="Menu" unique_id=1771761026]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -314,6 +348,8 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+script = ExtResource("14_2u3nc")
+metadata/_custom_type_script = "uid://bwm26r6vbt68o"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Menu/LobbyMenu" unique_id=1144711811]
 layout_mode = 2
@@ -363,25 +399,6 @@ theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/PlayerList/MarginContainer2" unique_id=896505673]
 layout_mode = 2
-
-[node name="PlayerName" type="Panel" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/PlayerList/MarginContainer2/VBoxContainer" unique_id=389731657]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/PlayerList/MarginContainer2/VBoxContainer/PlayerName" unique_id=1139150563]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -20.0
-offset_right = 65.0
-offset_bottom = 20.0
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-
-[node name="Label" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/PlayerList/MarginContainer2/VBoxContainer/PlayerName/MarginContainer" unique_id=309244477]
-layout_mode = 2
-text = "Andrew"
 
 [node name="Spacer2" type="Control" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer" unique_id=349370104]
 layout_mode = 2
@@ -570,13 +587,10 @@ spawn_path = NodePath("..")
 [connection signal="toggled" from="Menu/Options/MarginContainer/VBoxContainer/Ping" to="FpsCounter" method="_on_ping_toggled"]
 [connection signal="value_changed" from="Menu/Options/MarginContainer/VBoxContainer/HBoxContainer/MouseSensitivity" to="Menu/Options/MarginContainer/VBoxContainer/HBoxContainer/MouseSensitivity" method="_on_value_changed"]
 [connection signal="value_changed" from="Menu/Options/MarginContainer/VBoxContainer/HBoxContainer2/ControllerSensitivity" to="Menu/Options/MarginContainer/VBoxContainer/HBoxContainer2/ControllerSensitivity" method="_on_value_changed"]
-[connection signal="pressed" from="Menu/Options/MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="Menu/Options/MarginContainer/VBoxContainer/Back" to="Menu/PauseMenu/MarginContainer/VBoxContainer/Options" method="_on_back_pressed"]
-[connection signal="pressed" from="Menu/Options/MarginContainer/VBoxContainer/Back" to="Menu/MainMenu/MarginContainer/VBoxContainer/OptionsButton" method="_on_back_pressed"]
-[connection signal="pressed" from="Menu/PauseMenu/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="Menu/PauseMenu/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
-[connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/HBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
-[connection signal="toggled" from="Menu/MainMenu/MarginContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_toggled"]
-[connection signal="toggled" from="Menu/MainMenu/MarginContainer/VBoxContainer/OptionsButton" to="Menu/Options/MarginContainer/VBoxContainer/Fullscreen" method="_on_options_button_toggled"]
+[connection signal="pressed" from="Menu/Options/MarginContainer/VBoxContainer/Back" to="Menu" method="_on_options_back_pressed"]
+[connection signal="pressed" from="Menu/PauseMenu/MarginContainer/VBoxContainer/Resume" to="Menu" method="_on_resume_pressed"]
+[connection signal="pressed" from="Menu/PauseMenu/MarginContainer/VBoxContainer/Options" to="Menu" method="_on_pause_options_pressed"]
+[connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/OptionsButton" to="Menu" method="_on_main_menu_options_pressed"]
+[connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/HostButton" to="Menu" method="_on_host_button_pressed"]
+[connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/HBoxContainer/JoinButton" to="Menu" method="_on_join_button_pressed"]
 [connection signal="toggled" from="Menu/MainMenu/MusicToggle" to="." method="_on_music_toggle_toggled"]

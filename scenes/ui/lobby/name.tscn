@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://xc13rwyjd7sd"]
+
+[ext_resource type="Script" uid="uid://d3gnpahb8w3x2" path="res://scenes/ui/lobby/name.gd" id="1_xhft0"]
+
+[node name="PlayerName" type="Panel" unique_id=1274371647]
+custom_minimum_size = Vector2(0, 32)
+script = ExtResource("1_xhft0")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=999813273]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 65.0
+offset_bottom = 20.0
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+
+[node name="Label" type="Label" parent="MarginContainer" unique_id=656321691]
+layout_mode = 2
+text = "Andrew"
