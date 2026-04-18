@@ -604,6 +604,7 @@ spawn_path = NodePath("..")
 
 [node name="Shipment" parent="Map" unique_id=1969225845 instance=ExtResource("13_2o6r5")]
 
+[connection signal="spawned" from="UserSpawner" to="." method="_on_user_spawner_spawned"]
 [connection signal="toggled" from="Menu/Options/MarginContainer/VBoxContainer/FpsCounter" to="FpsCounter" method="_on_fps_counter_toggled"]
 [connection signal="toggled" from="Menu/Options/MarginContainer/VBoxContainer/Ping" to="FpsCounter" method="_on_ping_toggled"]
 [connection signal="value_changed" from="Menu/Options/MarginContainer/VBoxContainer/HBoxContainer/MouseSensitivity" to="Menu/Options/MarginContainer/VBoxContainer/HBoxContainer/MouseSensitivity" method="_on_value_changed"]
@@ -614,5 +615,4 @@ spawn_path = NodePath("..")
 [connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/OptionsButton" to="Menu" method="_on_main_menu_options_pressed"]
 [connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/HostButton" to="Menu" method="_on_host_button_pressed"]
 [connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/HBoxContainer/JoinButton" to="Menu" method="_on_join_button_pressed"]
-[connection signal="toggled" from="Menu/MainMenu/MusicToggle" to="." method="_on_music_toggle_toggled"]
 [connection signal="pressed" from="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HostButton" to="Menu/LobbyMenu" method="_on_start_match_pressed"]
