@@ -2,6 +2,12 @@ class_name LobbyManager
 extends PanelContainer
 
 signal start_game
+signal setting_changed(setting: String, value: Variant)
+
+var maps : Dictionary[String, String] = {
+	"Shipment": "res://maps/shipment.tscn",
+	"Nuketown": "res://maps/nuketown.tscn"
+}
 
 @onready var name_scene: PackedScene = load("res://scenes/ui/lobby/name.tscn")
 
@@ -11,13 +17,27 @@ signal start_game
 
 @onready var selected_map_name: Label = $HBoxContainer/MarginContainer2/VBoxContainer2/MarginContainer/Label3
 
+@onready var map: OptionButton = %Map
+@onready var mode: OptionButton = %Mode
+@onready var score_target: SpinBox = %ScoreTarget
+@onready var respawn_time: SpinBox = %RespawnTime
+@onready var start_button: Button = %StartButton
+
 @onready var host_only_options: Dictionary[String, Control] = {
-	"map": $HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer2/OptionButton,
-	"gamemode": $HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer2/OptionButton2,
-	"score_target": $HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer2/LineEdit,
-	"respawn_time": $HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer2/LineEdit2,
-	"start_button": $HBoxContainer/MarginContainer2/VBoxContainer2/HostButton
+	"map": map,
+	"gamemode": mode,
+	"score_target": score_target,
+	"respawn_time": respawn_time,
+	"start_button": start_button
 }
+
+func _ready() -> void:
+	map.clear()
+	for m in maps:
+		map.add_item(m)
+		
+	mode.clear()
+	mode.add_item("Deathmatch")
 
 func disable_control(control: Control, state: bool = false) -> void:
 	if control is SpinBox:
@@ -29,7 +49,6 @@ func set_host_mode(value: bool = true) -> void:
 	for option in host_only_options:
 		disable_control(host_only_options[option], value)
 	
-	var start_button := host_only_options["start_button"] as Button
 	start_button.text = "Start Game" if value else "Only Host Can Start Game"
 	start_button.disabled = not value
 
@@ -43,5 +62,23 @@ func set_player_list(players: Array[User]) -> void:
 		label.set_text(player.username)
 		player_list.add_child(label)
 
+func set_game_rules(game_rules: GameRules) -> void:
+	map.selected = maps.values().find(game_rules.map_resource_path)
+	#mode.selected = game_rules.mode
+	score_target.value = game_rules.score_target
+	respawn_time.value = game_rules.respawn_time
+
 func _on_start_match_pressed() -> void:
 	start_game.emit()
+
+func _on_map_item_selected(index: int) -> void:
+	setting_changed.emit("map_resource_path", maps.values()[index])
+	
+func _on_mode_item_selected(index: int) -> void:
+	pass # Replace with function body. 
+
+func _score_target_changed(value: float) -> void:
+	setting_changed.emit("score_target", value as int)
+
+func _respawn_time_changed(value: float) -> void:
+	setting_changed.emit("respawn_time", value)

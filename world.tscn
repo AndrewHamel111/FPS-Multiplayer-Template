@@ -13,7 +13,6 @@
 [ext_resource type="Script" uid="uid://du5qtfmm8p5du" path="res://scripts/ui/menu/pause/resume.gd" id="7_5cdyw"]
 [ext_resource type="Script" uid="uid://bmy1ha2maxmwg" path="res://scripts/ui/menu/options/controller_sensitivity.gd" id="7_jhf7u"]
 [ext_resource type="Script" uid="uid://o3k14mw74n81" path="res://scripts/ui/menu/pause/quit.gd" id="9_ucmny"]
-[ext_resource type="PackedScene" uid="uid://dabaehbquawic" path="res://maps/shipment.tscn" id="13_2o6r5"]
 [ext_resource type="Texture2D" uid="uid://kpu3a8umkw1u" path="res://maps/shipment_preview.png" id="13_70uel"]
 [ext_resource type="Script" uid="uid://bwm26r6vbt68o" path="res://scripts/ui/menu/lobby.gd" id="14_2u3nc"]
 
@@ -499,7 +498,8 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="OptionButton" type="OptionButton" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer2" unique_id=168542571]
+[node name="Map" type="OptionButton" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer2" unique_id=168542571]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 selected = 0
@@ -509,7 +509,8 @@ popup/item_0/id = 0
 popup/item_1/text = "Nuketown"
 popup/item_1/id = 1
 
-[node name="OptionButton2" type="OptionButton" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer2" unique_id=708826230]
+[node name="Mode" type="OptionButton" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer2" unique_id=708826230]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 selected = 0
@@ -550,7 +551,8 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LineEdit" type="SpinBox" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer2" unique_id=887205627]
+[node name="ScoreTarget" type="SpinBox" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer2" unique_id=887205627]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 min_value = 5.0
@@ -560,7 +562,8 @@ rounded = true
 allow_greater = true
 suffix = "kills"
 
-[node name="LineEdit2" type="SpinBox" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer2" unique_id=1941994942]
+[node name="RespawnTime" type="SpinBox" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer2" unique_id=1941994942]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 min_value = 1.0
@@ -573,7 +576,8 @@ suffix = "seconds"
 [node name="HSeparator2" type="HSeparator" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1837839751]
 layout_mode = 2
 
-[node name="HostButton" type="Button" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1630964715]
+[node name="StartButton" type="Button" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1630964715]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Start Match"
 script = ExtResource("4_nuahp")
@@ -597,12 +601,10 @@ label_settings = SubResource("LabelSettings_2u3nc")
 horizontal_alignment = 1
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=504832954]
-_spawnable_scenes = PackedStringArray("uid://b2qhxdrnviyqf")
+_spawnable_scenes = PackedStringArray("uid://b2qhxdrnviyqf", "uid://bosh48knotfug")
 spawn_path = NodePath("..")
 
 [node name="Map" type="Node" parent="." unique_id=8076072]
-
-[node name="Shipment" parent="Map" unique_id=1969225845 instance=ExtResource("13_2o6r5")]
 
 [connection signal="spawned" from="UserSpawner" to="." method="_on_user_spawner_spawned"]
 [connection signal="toggled" from="Menu/Options/MarginContainer/VBoxContainer/FpsCounter" to="FpsCounter" method="_on_fps_counter_toggled"]
@@ -615,4 +617,8 @@ spawn_path = NodePath("..")
 [connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/OptionsButton" to="Menu" method="_on_main_menu_options_pressed"]
 [connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/HostButton" to="Menu" method="_on_host_button_pressed"]
 [connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/HBoxContainer/JoinButton" to="Menu" method="_on_join_button_pressed"]
-[connection signal="pressed" from="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HostButton" to="Menu/LobbyMenu" method="_on_start_match_pressed"]
+[connection signal="item_selected" from="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer2/Map" to="Menu/LobbyMenu" method="_on_map_item_selected"]
+[connection signal="item_selected" from="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer2/Mode" to="Menu/LobbyMenu" method="_on_mode_item_selected"]
+[connection signal="value_changed" from="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer2/ScoreTarget" to="Menu/LobbyMenu" method="_score_target_changed"]
+[connection signal="value_changed" from="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer2/RespawnTime" to="Menu/LobbyMenu" method="_respawn_time_changed"]
+[connection signal="pressed" from="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/StartButton" to="Menu/LobbyMenu" method="_on_start_match_pressed"]

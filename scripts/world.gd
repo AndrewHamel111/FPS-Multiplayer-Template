@@ -4,6 +4,7 @@ extends Node
 
 const PlayerScene = preload("res://player.tscn")
 const UserScene = preload("res://scenes/networking/user.tscn")
+const GameRulesScene = preload("res://scenes/networking/game_rules.tscn")
 const PORT = 9999
 const PLAYER_HEALTH_DEFAULT = 2
 var enet_peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
@@ -53,7 +54,6 @@ func set_pause(is_paused: bool) -> void:
 #func _ready() -> void:
 func _on_host_button_pressed() -> void:
 	menu_manager.show_menu(Menu.LOBBY)
-	$Menu/DollyCamera.hide()
 	menu_music.stop()
 
 	enet_peer.create_server(PORT)
@@ -65,15 +65,21 @@ func _on_host_button_pressed() -> void:
 	new_user.name = "%d" % multiplayer.get_unique_id() # should always be 1 anyway :P
 	new_user.username = menu_manager.name_entry.text
 	$Users.add_child(new_user)
+	
+	var game_rules : GameRules = get_node("GameRules")
+	if not game_rules:
+		game_rules = GameRulesScene.instantiate()
+		add_child(game_rules)
+	game_rules.changed.connect(_update_game_rules_ui)
 
 	#upnp_setup()
 	
 	menu_manager.lobby.set_host_mode(true)
 	menu_manager.lobby.set_player_list(get_player_list())
+	menu_manager.lobby.setting_changed.connect(_on_setting_changed)
 
 func start_game() -> void:
 	state = GameState.STARTING
-	# TODO: for each user, append their peer id to this list
 	loading_players = []
 	for user in get_player_list():
 		loading_players.push_back(user.get_name().to_int())
@@ -89,7 +95,6 @@ func join_game(address: String) -> void:
 
 @rpc("any_peer", "call_remote", "reliable")
 func _on_connected_to_host(server_state: int) -> void:
-	# set username
 	var peer := multiplayer.get_unique_id()
 	var my_user := get_node("Users/%d" % peer) as User
 	if not my_user:
@@ -100,6 +105,7 @@ func _on_connected_to_host(server_state: int) -> void:
 		menu_manager.show_menu(Menu.LOBBY)
 		menu_manager.lobby.set_host_mode(false)
 		menu_manager.lobby.set_player_list(get_player_list())
+		(get_node("GameRules") as GameRules).changed.connect(_update_game_rules_ui)
 
 func get_player_list() -> Array[User]:
 	var users: Array[User] = []
@@ -115,16 +121,17 @@ func _player_list_changed() -> void:
 @rpc("any_peer", "call_local", "reliable")
 func _prepare_client() -> void:
 	menu_manager.show_menu(Menu.LOADING)
-	# TODO: check "game configuration" object synced in tree for following information
-	# game rules
-	# game map
+	var game_rules := get_node("GameRules") as GameRules
+	var map_to_load := game_rules.map_resource_path
+	#TODO: Can we do an asynchronous load, please?
+	var map_scene := load(map_to_load) as PackedScene
+	var map := map_scene.instantiate()
+	$Map.add_child(map)
+	current_level = map as Map
 	
-	# TODO: load map
-	# tell the server when loading is done
-	get_tree().create_timer(randf_range(1.5, 5.0)).timeout.connect(_on_client_loading_complete)
+	_on_client_loading_complete()
 
 func _on_client_loading_complete() -> void:
-	# TODO: is this the appropriate way for a client to get it's own unique id?
 	_client_finished_loading.rpc_id(1, multiplayer.get_unique_id())
 
 @rpc("any_peer", "call_local", "reliable")
@@ -163,9 +170,6 @@ func _on_peer_connected(peer_id: int) -> void:
 	elif state == GameState.STARTING:
 		loading_players.push_back(peer_id)
 		_prepare_client.rpc_id(peer_id)
-	
-	#_player_list_changed.rpc()
-	#get_tree().create_timer(0.5).timeout.connect(func() -> void: _player_list_changed.rpc())
 
 func _on_peer_disconnected(peer_id: int) -> void:
 	if state == GameState.STARTED:
@@ -215,3 +219,11 @@ func _on_player_death(player: Player) -> void:
 
 func _on_user_spawner_spawned(node: Node) -> void:
 	(node as User).name_changed.connect(func() -> void: _player_list_changed())
+
+func _on_setting_changed(setting: String, value: Variant) -> void:
+	var rules := get_node("GameRules") as GameRules
+	rules.set(setting, value)
+	rules.changed.emit()
+
+func _update_game_rules_ui() -> void:
+	menu_manager.lobby.set_game_rules(get_node("GameRules") as GameRules)

@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bosh48knotfug"]
+
+[ext_resource type="Script" uid="uid://dh7rdh2fgk4or" path="res://scenes/networking/game_rules.gd" id="1_q0hf1"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_q0hf1"]
+properties/0/path = NodePath(".:map_resource_path")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:mode")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:score_target")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:respawn_time")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+
+[node name="GameRules" type="Node" unique_id=821292522]
+script = ExtResource("1_q0hf1")
+metadata/_custom_type_script = "uid://dh7rdh2fgk4or"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1120349332]
+replication_config = SubResource("SceneReplicationConfig_q0hf1")
+
+[connection signal="delta_synchronized" from="MultiplayerSynchronizer" to="." method="_on_multiplayer_synchronizer_delta_synchronized"]
