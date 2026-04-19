@@ -2,6 +2,7 @@ extends Node
 
 @onready var menu_music: AudioStreamPlayer = %MenuMusic
 
+@onready var map_library : MapLibrary = load("res://maps/default_maps.tres")
 const PlayerScene = preload("res://player.tscn")
 const UserScene = preload("res://scenes/networking/user.tscn")
 const GameRulesScene = preload("res://scenes/networking/game_rules.tscn")
@@ -22,7 +23,7 @@ var state: GameState = GameState.PRE
 var loading_players: Array[int]
 
 @onready var menu_manager := $Menu as MenuManager
-@onready var current_level := $Map.get_child(0) as Map
+@onready var current_level : Map
 
 func _ready() -> void:
 	menu_manager.host_pressed.connect(_on_host_button_pressed)
@@ -66,7 +67,7 @@ func _on_host_button_pressed() -> void:
 	new_user.username = menu_manager.name_entry.text
 	$Users.add_child(new_user)
 	
-	var game_rules : GameRules = get_node("GameRules")
+	var game_rules : GameRules = get_node_or_null("GameRules")
 	if not game_rules:
 		game_rules = GameRulesScene.instantiate()
 		add_child(game_rules)
@@ -77,6 +78,7 @@ func _on_host_button_pressed() -> void:
 	menu_manager.lobby.set_host_mode(true)
 	menu_manager.lobby.set_player_list(get_player_list())
 	menu_manager.lobby.setting_changed.connect(_on_setting_changed)
+	menu_manager.lobby.set_game_rules(game_rules)
 
 func start_game() -> void:
 	state = GameState.STARTING
@@ -122,9 +124,9 @@ func _player_list_changed() -> void:
 func _prepare_client() -> void:
 	menu_manager.show_menu(Menu.LOADING)
 	var game_rules := get_node("GameRules") as GameRules
-	var map_to_load := game_rules.map_resource_path
+	var map_to_load := game_rules.map
 	#TODO: Can we do an asynchronous load, please?
-	var map_scene := load(map_to_load) as PackedScene
+	var map_scene := load(map_library.maps[map_to_load].map_resource_path) as PackedScene
 	var map := map_scene.instantiate()
 	$Map.add_child(map)
 	current_level = map as Map

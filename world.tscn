@@ -60,13 +60,13 @@ shader_parameter/color_over = Color(0, 0, 0, 1)
 
 [sub_resource type="Theme" id="Theme_utqnk"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_2o6r5"]
+[sub_resource type="LabelSettings" id="LabelSettings_hiqwa"]
 font_size = 24
 
-[sub_resource type="LabelSettings" id="LabelSettings_hiqwa"]
+[sub_resource type="LabelSettings" id="LabelSettings_udxuc"]
 font_size = 32
 
-[sub_resource type="LabelSettings" id="LabelSettings_70uel"]
+[sub_resource type="LabelSettings" id="LabelSettings_ikiii"]
 font_color = Color(0.5649617, 0.5649616, 0.5649616, 1)
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
@@ -341,22 +341,21 @@ size_flags_vertical = 8
 button_pressed = true
 text = "Music"
 
-[node name="LobbyMenu" type="PanelContainer" parent="Menu" unique_id=1771761026]
+[node name="LobbyMenu" type="PanelContainer" parent="Menu" unique_id=199900853]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+theme = SubResource("Theme_utqnk")
 script = ExtResource("14_2u3nc")
 metadata/_custom_type_script = "uid://bwm26r6vbt68o"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Menu/LobbyMenu" unique_id=1144711811]
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/LobbyMenu" unique_id=542833478]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Menu/LobbyMenu/HBoxContainer" unique_id=690185142]
+[node name="MarginContainer" type="MarginContainer" parent="Menu/LobbyMenu/HBoxContainer" unique_id=1690592399]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
@@ -364,30 +363,30 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer" unique_id=1897383422]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer" unique_id=101776766]
 layout_mode = 2
 
-[node name="MainMenuLabel" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer" unique_id=283779453]
+[node name="MainMenuLabel" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1346575264]
 layout_mode = 2
 text = "Pre-Game Lobby"
-label_settings = SubResource("LabelSettings_2o6r5")
+label_settings = SubResource("LabelSettings_hiqwa")
 vertical_alignment = 1
 
-[node name="Spacer" type="Control" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer" unique_id=543941908]
+[node name="Spacer" type="Control" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer" unique_id=317304142]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 
-[node name="PlayerListLabel" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1306844883]
+[node name="PlayerListLabel" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1960152579]
 layout_mode = 2
 text = "Players"
 vertical_alignment = 1
 
-[node name="PlayerList" type="Panel" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1000938222]
+[node name="PlayerList" type="Panel" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1897481485]
 custom_minimum_size = Vector2(0, 232)
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/PlayerList" unique_id=710964193]
+[node name="MarginContainer2" type="MarginContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/PlayerList" unique_id=64180826]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -399,19 +398,19 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/PlayerList/MarginContainer2" unique_id=896505673]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/PlayerList/MarginContainer2" unique_id=1322552885]
 layout_mode = 2
 
-[node name="Spacer2" type="Control" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer" unique_id=349370104]
+[node name="Spacer2" type="Control" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer" unique_id=485444021]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.05
 
-[node name="Chat" type="Panel" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1336244764]
+[node name="Chat" type="Panel" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1000604877]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/Chat" unique_id=1269188132]
+[node name="MarginContainer" type="MarginContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/Chat" unique_id=1987917047]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -423,29 +422,29 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer" unique_id=1718206339]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer" unique_id=1192880367]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer/VBoxContainer" unique_id=615801087]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer/VBoxContainer" unique_id=1069874198]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
 
-[node name="Label" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1962383494]
+[node name="Label" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1987946697]
 layout_mode = 2
 text = "Andrew: yeah that's what I was thinking"
 
-[node name="Label2" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1768145136]
+[node name="Label2" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer/VBoxContainer/VBoxContainer" unique_id=945472862]
 layout_mode = 2
 text = "Andrew: maybe some extra perks and character controller improvements"
 autowrap_mode = 2
 
-[node name="Panel2" type="LineEdit" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer/VBoxContainer" unique_id=92430508]
+[node name="Panel2" type="LineEdit" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer/VBoxContainer" unique_id=604216971]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer2" type="MarginContainer" parent="Menu/LobbyMenu/HBoxContainer" unique_id=280870433]
+[node name="MarginContainer2" type="MarginContainer" parent="Menu/LobbyMenu/HBoxContainer" unique_id=746420112]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 5
@@ -453,52 +452,52 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2" unique_id=1045667015]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2" unique_id=1792420503]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=880977437]
+[node name="MarginContainer" type="MarginContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1003836074]
 layout_mode = 2
 theme_override_constants/margin_left = 32
 
-[node name="Label3" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/MarginContainer" unique_id=1055277134]
+[node name="Label3" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/MarginContainer" unique_id=1093141518]
 layout_mode = 2
 text = "Shipment - Deathmatch"
-label_settings = SubResource("LabelSettings_hiqwa")
+label_settings = SubResource("LabelSettings_udxuc")
 
-[node name="TextureRect" type="TextureRect" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=800724431]
+[node name="TextureRect" type="TextureRect" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=400837222]
 layout_mode = 2
 texture = ExtResource("13_70uel")
 expand_mode = 5
 
-[node name="Label4" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1100181364]
+[node name="Label4" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1568912158]
 layout_mode = 2
 text = "Match Settings"
-label_settings = SubResource("LabelSettings_70uel")
+label_settings = SubResource("LabelSettings_ikiii")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=72137267]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1965360679]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2" unique_id=20419042]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2" unique_id=1267834386]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer" unique_id=1612386153]
+[node name="Label" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer" unique_id=1237465919]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 text = "Map"
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer" unique_id=1104232597]
+[node name="Label2" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer" unique_id=1362514024]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 text = "Game Mode"
 vertical_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2" unique_id=2042177397]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2" unique_id=370273873]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Map" type="OptionButton" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer2" unique_id=168542571]
+[node name="Map" type="OptionButton" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer2" unique_id=2089688011]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
@@ -509,7 +508,7 @@ popup/item_0/id = 0
 popup/item_1/text = "Nuketown"
 popup/item_1/id = 1
 
-[node name="Mode" type="OptionButton" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer2" unique_id=708826230]
+[node name="Mode" type="OptionButton" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer2" unique_id=2045550088]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
@@ -520,38 +519,38 @@ popup/item_0/id = 0
 popup/item_1/text = "Team Deathmatch"
 popup/item_1/id = 1
 
-[node name="HSeparator" type="HSeparator" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1026463651]
+[node name="HSeparator" type="HSeparator" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1771733230]
 layout_mode = 2
 
-[node name="Label5" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=718487030]
+[node name="Label5" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1022100844]
 layout_mode = 2
 text = "Game Rules"
-label_settings = SubResource("LabelSettings_70uel")
+label_settings = SubResource("LabelSettings_ikiii")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1065420007]
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=135097831]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer" unique_id=1377051072]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer" unique_id=1093221603]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer" unique_id=2025227797]
+[node name="Label" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer" unique_id=122397274]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 text = "Score Target"
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer" unique_id=1653222876]
+[node name="Label2" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer" unique_id=1877877782]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 text = "Respawn Delay"
 vertical_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer" unique_id=1627723986]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer" unique_id=1241953777]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ScoreTarget" type="SpinBox" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer2" unique_id=887205627]
+[node name="ScoreTarget" type="SpinBox" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer2" unique_id=1708075597]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
@@ -562,7 +561,7 @@ rounded = true
 allow_greater = true
 suffix = "kills"
 
-[node name="RespawnTime" type="SpinBox" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer2" unique_id=1941994942]
+[node name="RespawnTime" type="SpinBox" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer2" unique_id=1591876798]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
@@ -573,10 +572,10 @@ rounded = true
 allow_greater = true
 suffix = "seconds"
 
-[node name="HSeparator2" type="HSeparator" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1837839751]
+[node name="HSeparator2" type="HSeparator" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1219840046]
 layout_mode = 2
 
-[node name="StartButton" type="Button" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1630964715]
+[node name="StartButton" type="Button" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1282123789]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Start Match"

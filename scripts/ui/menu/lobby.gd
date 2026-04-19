@@ -4,18 +4,15 @@ extends PanelContainer
 signal start_game
 signal setting_changed(setting: String, value: Variant)
 
-var maps : Dictionary[String, String] = {
-	"Shipment": "res://maps/shipment.tscn",
-	"Nuketown": "res://maps/nuketown.tscn"
-}
-
 @onready var name_scene: PackedScene = load("res://scenes/ui/lobby/name.tscn")
+@onready var map_library : MapLibrary = load("res://maps/default_maps.tres")
 
 @onready var player_list: VBoxContainer = $HBoxContainer/MarginContainer/VBoxContainer/PlayerList/MarginContainer2/VBoxContainer
 #@onready var chat_box: VBoxContainer = $HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer/VBoxContainer/VBoxContainer
 #@onready var chat_input: LineEdit = $HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer/VBoxContainer/Panel2
 
 @onready var selected_map_name: Label = $HBoxContainer/MarginContainer2/VBoxContainer2/MarginContainer/Label3
+@onready var selected_map_preview: TextureRect = $HBoxContainer/MarginContainer2/VBoxContainer2/TextureRect
 
 @onready var map: OptionButton = %Map
 @onready var mode: OptionButton = %Mode
@@ -33,7 +30,7 @@ var maps : Dictionary[String, String] = {
 
 func _ready() -> void:
 	map.clear()
-	for m in maps:
+	for m in map_library.maps:
 		map.add_item(m)
 		
 	mode.clear()
@@ -63,7 +60,9 @@ func set_player_list(players: Array[User]) -> void:
 		player_list.add_child(label)
 
 func set_game_rules(game_rules: GameRules) -> void:
-	map.selected = maps.values().find(game_rules.map_resource_path)
+	map.selected = map_library.maps.keys().find(game_rules.map)
+	selected_map_name.text = game_rules.map
+	selected_map_preview.texture = map_library.maps[game_rules.map].map_preview
 	#mode.selected = game_rules.mode
 	score_target.value = game_rules.score_target
 	respawn_time.value = game_rules.respawn_time
@@ -72,9 +71,12 @@ func _on_start_match_pressed() -> void:
 	start_game.emit()
 
 func _on_map_item_selected(index: int) -> void:
-	setting_changed.emit("map_resource_path", maps.values()[index])
+	var map_name : String = map_library.maps.keys()[index]
+	setting_changed.emit("map", map_name)
+	selected_map_name.text = map_name
+	selected_map_preview.texture = map_library.maps[map_name].map_preview
 	
-func _on_mode_item_selected(index: int) -> void:
+func _on_mode_item_selected(index: int) -> void: 
 	pass # Replace with function body. 
 
 func _score_target_changed(value: float) -> void:

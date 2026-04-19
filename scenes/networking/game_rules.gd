@@ -8,7 +8,7 @@ enum Mode {
 	TEAM_DEATHMATCH
 }
 
-@export var map_resource_path : String = "res://maps/shipment.tscn"
+@export var map : String = "Shipment"
 @export var mode : Mode = Mode.DEATHMATCH
 
 @export var score_target := 30
