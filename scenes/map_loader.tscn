@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dh50mljvcqcg8"]
+
+[ext_resource type="Script" uid="uid://bmx2rvdv7h3x3" path="res://scripts/map_loader.gd" id="1_jqnuy"]
+
+[node name="MapLoader" type="Node" unique_id=182390979]
+script = ExtResource("1_jqnuy")
+metadata/_custom_type_script = "uid://bmx2rvdv7h3x3"

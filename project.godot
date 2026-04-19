@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://scripts/Global.gd"
+MapLoader="*uid://dh50mljvcqcg8"
 
 [debug]
 

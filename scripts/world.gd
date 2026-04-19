@@ -128,13 +128,14 @@ func _prepare_client() -> void:
 	menu_manager.show_menu(Menu.LOADING)
 	var game_rules := get_node("GameRules") as GameRules
 	var map_to_load := game_rules.map
-	#TODO: Can we do an asynchronous load, please?
-	var map_scene := load(map_library.maps[map_to_load].map_resource_path) as PackedScene
-	var map := map_scene.instantiate()
-	$Map.add_child(map)
-	current_level = map as Map
 	
-	_on_client_loading_complete()
+	var on_complete := func(map_scene: PackedScene) -> void:
+		var map := map_scene.instantiate()
+		$Map.add_child(map)
+		current_level = map as Map
+		_on_client_loading_complete()
+	
+	MapLoader.load_map(map_library.maps[map_to_load].map_resource_path, on_complete)
 
 func _on_client_loading_complete() -> void:
 	_client_finished_loading.rpc_id(1, multiplayer.get_unique_id())
