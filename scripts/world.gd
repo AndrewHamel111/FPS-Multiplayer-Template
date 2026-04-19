@@ -29,6 +29,7 @@ func _ready() -> void:
 	menu_manager.host_pressed.connect(_on_host_button_pressed)
 	menu_manager.join_pressed.connect(join_game)
 	menu_manager.pause_state_changed.connect(set_pause)
+	menu_manager.exit_lobby.connect(_on_exit_lobby)
 	menu_manager.lobby.start_game.connect(start_game)
 	menu_manager.show_menu(Menu.MAIN)
 
@@ -102,6 +103,8 @@ func _on_connected_to_host(server_state: int) -> void:
 	if not my_user:
 		push_error("Failed to get user in _on_connected_to_host")
 	my_user.username = menu_manager.name_entry.text
+	
+	multiplayer.server_disconnected.connect(_on_host_disconnected)
 	
 	if server_state as GameState == GameState.PRE:
 		menu_manager.show_menu(Menu.LOBBY)
@@ -177,11 +180,19 @@ func _on_peer_disconnected(peer_id: int) -> void:
 	if state == GameState.STARTED:
 		remove_player(peer_id)
 	elif state == GameState.STARTING:
-		# TODO: handle peer disconnect while game is loading
-		pass
+		var user := get_node("Users/%d" % peer_id) as User
+		$Users.remove_child(user)
+		user.free()
+		_client_finished_loading(peer_id)
 	else:
-		# TODO: handle peer disconnect from lobby view
-		pass
+		var user := get_node("Users/%d" % peer_id) as User
+		$Users.remove_child(user)
+		user.free()
+		_player_list_changed.rpc()
+
+func _on_host_disconnected() -> void:
+	# TODO: modal menu explaining disconnect reason
+	menu_manager.show_menu(Menu.MAIN)
 
 func add_player(peer_id: int) -> void:
 	var player: Player = PlayerScene.instantiate()
@@ -229,3 +240,11 @@ func _on_setting_changed(setting: String, value: Variant) -> void:
 
 func _update_game_rules_ui() -> void:
 	menu_manager.lobby.set_game_rules(get_node("GameRules") as GameRules)
+
+func _on_exit_lobby() -> void:
+	if multiplayer and multiplayer:
+		multiplayer.multiplayer_peer.close()
+	for user in $Users.get_children():
+		$Users.remove_child(user)
+		user.free()
+	#get_tree().reload_current_scene()
