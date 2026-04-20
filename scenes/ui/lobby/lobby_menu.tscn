@@ -1,0 +1,263 @@
+[gd_scene format=3 uid="uid://db82t7rpe6gp7"]
+
+[ext_resource type="Script" uid="uid://bwm26r6vbt68o" path="res://scripts/ui/menu/lobby.gd" id="1_p0iof"]
+[ext_resource type="Texture2D" uid="uid://kpu3a8umkw1u" path="res://maps/shipment_preview.png" id="2_467sd"]
+[ext_resource type="Script" uid="uid://0f8ss4ubnuwj" path="res://scripts/ui/menu/host_button.gd" id="3_n4s6l"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2o6r5"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_hiqwa"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_70uel"]
+font_color = Color(0.5649617, 0.5649616, 0.5649616, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="LobbyMenu" type="PanelContainer" unique_id=533212590]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_p0iof")
+metadata/_custom_type_script = "uid://bwm26r6vbt68o"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1475396492]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=17493709]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer" unique_id=1043690765]
+layout_mode = 2
+
+[node name="MainMenuLabel" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer" unique_id=1824402739]
+layout_mode = 2
+text = "Pre-Game Lobby"
+label_settings = SubResource("LabelSettings_2o6r5")
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="HBoxContainer/MarginContainer/VBoxContainer" unique_id=413992112]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="PlayerListLabel" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer" unique_id=1383625673]
+layout_mode = 2
+text = "Players"
+vertical_alignment = 1
+
+[node name="PlayerList" type="Panel" parent="HBoxContainer/MarginContainer/VBoxContainer" unique_id=1595664067]
+custom_minimum_size = Vector2(0, 232)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/PlayerList" unique_id=301973107]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/PlayerList/MarginContainer2" unique_id=1905295998]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="HBoxContainer/MarginContainer/VBoxContainer" unique_id=954897823]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="Chat" type="Panel" parent="HBoxContainer/MarginContainer/VBoxContainer" unique_id=1051127139]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/Chat" unique_id=2105704866]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer" unique_id=74741951]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer/VBoxContainer" unique_id=1969428952]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer/VBoxContainer/VBoxContainer" unique_id=918494444]
+layout_mode = 2
+text = "Andrew: yeah that's what I was thinking"
+
+[node name="Label2" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1807056270]
+layout_mode = 2
+text = "Andrew: maybe some extra perks and character controller improvements"
+autowrap_mode = 2
+
+[node name="Panel2" type="LineEdit" parent="HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer/VBoxContainer" unique_id=800273811]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer" unique_id=1819268572]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/MarginContainer2" unique_id=1318440752]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1529575014]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+
+[node name="Label3" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer2/MarginContainer" unique_id=1566621353]
+layout_mode = 2
+text = "Shipment - Deathmatch"
+label_settings = SubResource("LabelSettings_hiqwa")
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=349390230]
+layout_mode = 2
+texture = ExtResource("2_467sd")
+expand_mode = 5
+
+[node name="Label4" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1078627686]
+layout_mode = 2
+text = "Match Settings"
+label_settings = SubResource("LabelSettings_70uel")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=274876210]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2" unique_id=648916155]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer" unique_id=969907991]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "Map"
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer" unique_id=1217930454]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "Game Mode"
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2" unique_id=431897651]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Map" type="OptionButton" parent="HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer2" unique_id=700627344]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Shipment"
+popup/item_0/id = 0
+popup/item_1/text = "Nuketown"
+popup/item_1/id = 1
+
+[node name="Mode" type="OptionButton" parent="HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer2" unique_id=1718234593]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Deathmatch"
+popup/item_0/id = 0
+popup/item_1/text = "Team Deathmatch"
+popup/item_1/id = 1
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=480486517]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1895101507]
+layout_mode = 2
+text = "Game Rules"
+label_settings = SubResource("LabelSettings_70uel")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1677026352]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer" unique_id=216930143]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer" unique_id=1243916335]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "Score Target"
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer" unique_id=126299044]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "Respawn Delay"
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer" unique_id=1957438483]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScoreTarget" type="SpinBox" parent="HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer2" unique_id=99078064]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+min_value = 5.0
+max_value = 30.0
+value = 30.0
+rounded = true
+allow_greater = true
+suffix = "kills"
+
+[node name="RespawnTime" type="SpinBox" parent="HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer2" unique_id=392076826]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+min_value = 1.0
+max_value = 5.0
+value = 3.0
+rounded = true
+allow_greater = true
+suffix = "seconds"
+
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1835260313]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=821579636]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Start Match"
+script = ExtResource("3_n4s6l")
+
+[connection signal="item_selected" from="HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer2/Map" to="." method="_on_map_item_selected"]
+[connection signal="item_selected" from="HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer2/Mode" to="." method="_on_mode_item_selected"]
+[connection signal="value_changed" from="HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer2/ScoreTarget" to="." method="_score_target_changed"]
+[connection signal="value_changed" from="HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer2/RespawnTime" to="." method="_respawn_time_changed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/VBoxContainer2/StartButton" to="." method="_on_start_match_pressed"]

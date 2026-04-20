@@ -1,35 +1,46 @@
 [gd_scene format=3 uid="uid://csapu6gqkjym8"]
 
+[ext_resource type="Script" uid="uid://cxp1f4pd3clyt" path="res://scripts/map.gd" id="1_kyq1u"]
 [ext_resource type="PackedScene" uid="uid://c03yippmxxlvr" path="res://imports/map2.glb" id="1_pw0un"]
 
-[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_r06yd"]
-energy_multiplier = 1.25
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ivbaf"]
+sky_top_color = Color(0.5631641, 0.40973243, 0.3231093, 1)
+sky_horizon_color = Color(0.7275125, 0.63962543, 0.52786195, 1)
+ground_horizon_color = Color(0.74350643, 0.6306463, 0.54090023, 1)
 
 [sub_resource type="Sky" id="Sky_78err"]
-sky_material = SubResource("PhysicalSkyMaterial_r06yd")
+sky_material = SubResource("ProceduralSkyMaterial_ivbaf")
 
 [sub_resource type="Environment" id="Environment_v7lsv"]
 background_mode = 2
 sky = SubResource("Sky_78err")
-tonemap_mode = 2
+ambient_light_source = 2
+ambient_light_color = Color(0.3623825, 0.2600413, 0.24102142, 1)
+tonemap_mode = 4
 tonemap_white = 6.0
 ssao_enabled = true
 glow_blend_mode = 4
 fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.23485687, 0.4809984, 0.72144014, 1)
 fog_sun_scatter = 0.17
-fog_density = 0.0099
+fog_density = 1.0
 fog_aerial_perspective = 1.0
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_wntx8"]
 
-[node name="Nuketown" type="Node" unique_id=1969225845]
+[sub_resource type="PrismMesh" id="PrismMesh_ivbaf"]
+
+[node name="Nuketown" type="Node" unique_id=1359994305]
+script = ExtResource("1_kyq1u")
+metadata/_custom_type_script = "uid://cxp1f4pd3clyt"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1357606402]
 environment = SubResource("Environment_v7lsv")
 camera_attributes = SubResource("CameraAttributesPractical_wntx8")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1855200436]
-transform = Transform3D(-0.8358073, -0.4701105, 0.28358814, -0.37594414, 0.8664961, 0.32840607, -0.40011516, 0.16787088, -0.9009591, 0, 4.88489, 0)
+transform = Transform3D(0.6028044, -0.040477358, 0.79686165, -0.37594414, 0.8664961, 0.3284061, -0.7037704, -0.49754006, 0.5071105, 0, 4.88489, 0)
 light_temperature = 4300.0
 light_energy = 5.0
 shadow_enabled = true
@@ -41,3 +52,75 @@ directional_shadow_blend_splits = true
 directional_shadow_max_distance = 99.3
 
 [node name="map2" parent="." unique_id=848546036 instance=ExtResource("1_pw0un")]
+
+[node name="spawns" type="Node" parent="." unique_id=935117613]
+
+[node name="Marker3D" type="Marker3D" parent="spawns" unique_id=1786379248]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 8.25, 0, 4.75)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D" unique_id=383127438]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_ivbaf")
+
+[node name="Marker3D2" type="Marker3D" parent="spawns" unique_id=1348420613]
+transform = Transform3D(0.49999997, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, 0.49999997, 17.75, 0, -9.25)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D2" unique_id=1822595164]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_ivbaf")
+
+[node name="Marker3D3" type="Marker3D" parent="spawns" unique_id=755213781]
+transform = Transform3D(-0.7071067, 0, 0.7071068, 0, 1, 0, -0.7071068, 0, -0.7071067, 11.25, 0, -19.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D3" unique_id=1349203530]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_ivbaf")
+
+[node name="Marker3D4" type="Marker3D" parent="spawns" unique_id=413947310]
+transform = Transform3D(-0.9659258, 0, -0.25881913, 0, 1, 0, 0.25881913, 0, -0.9659258, -12.5, 0, -14.75)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D4" unique_id=2003333479]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_ivbaf")
+
+[node name="Marker3D5" type="Marker3D" parent="spawns" unique_id=1593491804]
+transform = Transform3D(-0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, -0.70710677, 1.25, 0, -46.75)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D5" unique_id=141330878]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_ivbaf")
+
+[node name="Marker3D6" type="Marker3D" parent="spawns" unique_id=1872712373]
+transform = Transform3D(-0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, -0.70710677, -14.75, 0, -38.25)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D6" unique_id=306679895]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_ivbaf")
+
+[node name="Marker3D7" type="Marker3D" parent="spawns" unique_id=666525809]
+transform = Transform3D(0.49999997, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, 0.49999997, 11, 0, 12)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D7" unique_id=1617726370]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_ivbaf")
+
+[node name="Marker3D8" type="Marker3D" parent="spawns" unique_id=1154856070]
+transform = Transform3D(-0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, -0.70710677, -16, 0, 29)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D8" unique_id=945721786]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_ivbaf")
+
+[node name="Marker3D9" type="Marker3D" parent="spawns" unique_id=172904562]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -6, 0, 36.75)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D9" unique_id=1894086035]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_ivbaf")
+
+[node name="Marker3D10" type="Marker3D" parent="spawns" unique_id=1421606191]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25, 0, 31.75)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawns/Marker3D10" unique_id=294375655]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_ivbaf")

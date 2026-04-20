@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b57uspbprxc8"]
 
 [ext_resource type="Script" uid="uid://bd81ysdlqd6oy" path="res://scripts/world.gd" id="1_ho7yh"]
+[ext_resource type="Script" uid="uid://b2cc1l4mkxsw5" path="res://scripts/ui/menu/menu_manager.gd" id="3_hiqwa"]
 [ext_resource type="Script" uid="uid://chl816vkrpda8" path="res://scripts/ui/fps_counter.gd" id="4_2328u"]
 [ext_resource type="Script" uid="uid://0f8ss4ubnuwj" path="res://scripts/ui/menu/host_button.gd" id="4_nuahp"]
 [ext_resource type="Shader" uid="uid://b6ayymrhkylhq" path="res://scripts/shaders/blur.gdshader" id="4_p7mxg"]
@@ -12,7 +13,8 @@
 [ext_resource type="Script" uid="uid://du5qtfmm8p5du" path="res://scripts/ui/menu/pause/resume.gd" id="7_5cdyw"]
 [ext_resource type="Script" uid="uid://bmy1ha2maxmwg" path="res://scripts/ui/menu/options/controller_sensitivity.gd" id="7_jhf7u"]
 [ext_resource type="Script" uid="uid://o3k14mw74n81" path="res://scripts/ui/menu/pause/quit.gd" id="9_ucmny"]
-[ext_resource type="PackedScene" uid="uid://dabaehbquawic" path="res://maps/shipment.tscn" id="13_2o6r5"]
+[ext_resource type="Texture2D" uid="uid://kpu3a8umkw1u" path="res://maps/shipment_preview.png" id="13_70uel"]
+[ext_resource type="Script" uid="uid://bwm26r6vbt68o" path="res://scripts/ui/menu/lobby.gd" id="14_2u3nc"]
 
 [sub_resource type="Animation" id="Animation_ug7wi"]
 resource_name = "Dolly"
@@ -58,15 +60,37 @@ shader_parameter/color_over = Color(0, 0, 0, 1)
 
 [sub_resource type="Theme" id="Theme_utqnk"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_hiqwa"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_udxuc"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_ikiii"]
+font_color = Color(0.5649617, 0.5649616, 0.5649616, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2u3nc"]
+font_size = 24
+
 [node name="World" type="Node" unique_id=1564087886]
 script = ExtResource("1_ho7yh")
+
+[node name="UserSpawner" type="MultiplayerSpawner" parent="." unique_id=565318382]
+_spawnable_scenes = PackedStringArray("uid://b6s7471e60eqr")
+spawn_path = NodePath("../Users")
+
+[node name="Users" type="Node" parent="." unique_id=563358028]
 
 [node name="FpsCounter" type="Label" parent="." unique_id=433310222]
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("4_2328u")
 
-[node name="Menu" type="CanvasLayer" parent="." unique_id=1159263600]
+[node name="Menu" type="CanvasLayer" parent="." unique_id=574600361]
+script = ExtResource("3_hiqwa")
+metadata/_custom_type_script = "uid://b2cc1l4mkxsw5"
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="Menu" unique_id=2062837623]
 unique_name_in_owner = true
@@ -255,6 +279,35 @@ text = "Main Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="Menu/MainMenu/MarginContainer/VBoxContainer" unique_id=589011606]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/MainMenu/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1478189086]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_right = 16
+
+[node name="MainMenuLabel2" type="Label" parent="Menu/MainMenu/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer" unique_id=721864729]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Name"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="NameEntry" type="LineEdit" parent="Menu/MainMenu/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=704146936]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+text = "Player"
+max_length = 16
+
+[node name="OptionsButton" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer" unique_id=682399032]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Options"
+script = ExtResource("6_7g7sm")
+
 [node name="HostButton" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer" unique_id=2146500030]
 layout_mode = 2
 text = "Host"
@@ -267,18 +320,13 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+text = "localhost"
 placeholder_text = "Enter Address Here to join"
 alignment = 1
 
 [node name="JoinButton" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2049962251]
 layout_mode = 2
 text = "  Join  "
-
-[node name="OptionsButton" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer" unique_id=682399032]
-layout_mode = 2
-toggle_mode = true
-text = "Options"
-script = ExtResource("6_7g7sm")
 
 [node name="Quit" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer" unique_id=406382700]
 layout_mode = 2
@@ -293,25 +341,296 @@ size_flags_vertical = 8
 button_pressed = true
 text = "Music"
 
+[node name="LobbyMenu" type="PanelContainer" parent="Menu" unique_id=629139492]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_utqnk")
+script = ExtResource("14_2u3nc")
+metadata/_custom_type_script = "uid://bwm26r6vbt68o"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/LobbyMenu" unique_id=542833478]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/LobbyMenu/HBoxContainer" unique_id=1690592399]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer" unique_id=101776766]
+layout_mode = 2
+
+[node name="MainMenuLabel" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1346575264]
+layout_mode = 2
+text = "Pre-Game Lobby"
+label_settings = SubResource("LabelSettings_hiqwa")
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer" unique_id=317304142]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="PlayerListLabel" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1960152579]
+layout_mode = 2
+text = "Players"
+vertical_alignment = 1
+
+[node name="PlayerList" type="Panel" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1897481485]
+custom_minimum_size = Vector2(0, 232)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/PlayerList" unique_id=64180826]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/PlayerList/MarginContainer2" unique_id=1322552885]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer" unique_id=485444021]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="Chat" type="Panel" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1000604877]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/Chat" unique_id=1987917047]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer" unique_id=1192880367]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer/VBoxContainer" unique_id=1069874198]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+
+[node name="Label" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1987946697]
+layout_mode = 2
+text = "Andrew: yeah that's what I was thinking"
+
+[node name="Label2" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer/VBoxContainer/VBoxContainer" unique_id=945472862]
+layout_mode = 2
+text = "Andrew: maybe some extra perks and character controller improvements"
+autowrap_mode = 2
+
+[node name="Panel2" type="LineEdit" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer/VBoxContainer/Chat/MarginContainer/VBoxContainer" unique_id=604216971]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="Menu/LobbyMenu/HBoxContainer" unique_id=746420112]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2" unique_id=1792420503]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1003836074]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+
+[node name="Label3" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/MarginContainer" unique_id=1093141518]
+layout_mode = 2
+text = "Shipment - Deathmatch"
+label_settings = SubResource("LabelSettings_udxuc")
+
+[node name="TextureRect" type="TextureRect" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=400837222]
+layout_mode = 2
+texture = ExtResource("13_70uel")
+expand_mode = 5
+
+[node name="Label4" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1568912158]
+layout_mode = 2
+text = "Match Settings"
+label_settings = SubResource("LabelSettings_ikiii")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1965360679]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2" unique_id=1267834386]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer" unique_id=1237465919]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "Map"
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer" unique_id=1362514024]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "Game Mode"
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2" unique_id=370273873]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Map" type="OptionButton" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer2" unique_id=2089688011]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Shipment"
+popup/item_0/id = 0
+popup/item_1/text = "Nuketown"
+popup/item_1/id = 1
+
+[node name="Mode" type="OptionButton" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer2" unique_id=2045550088]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Deathmatch"
+popup/item_0/id = 0
+popup/item_1/text = "Team Deathmatch"
+popup/item_1/id = 1
+
+[node name="HSeparator" type="HSeparator" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1771733230]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1022100844]
+layout_mode = 2
+text = "Game Rules"
+label_settings = SubResource("LabelSettings_ikiii")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=135097831]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer" unique_id=1093221603]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer" unique_id=122397274]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "Score Target"
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer" unique_id=1877877782]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "Respawn Delay"
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer" unique_id=1241953777]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScoreTarget" type="SpinBox" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer2" unique_id=1708075597]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+min_value = 5.0
+max_value = 30.0
+value = 30.0
+rounded = true
+allow_greater = true
+suffix = "kills"
+
+[node name="RespawnTime" type="SpinBox" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer2" unique_id=1591876798]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+min_value = 1.0
+max_value = 5.0
+value = 3.0
+rounded = true
+allow_greater = true
+suffix = "seconds"
+
+[node name="HSeparator2" type="HSeparator" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1219840046]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1282123789]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Start Match"
+script = ExtResource("4_nuahp")
+
+[node name="LoadingMenu" type="PanelContainer" parent="Menu" unique_id=736428097]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="Menu/LoadingMenu" unique_id=1902142363]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/LoadingMenu/CenterContainer" unique_id=2116552325]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu/LoadingMenu/CenterContainer/VBoxContainer" unique_id=530942914]
+layout_mode = 2
+text = "LOADING"
+label_settings = SubResource("LabelSettings_2u3nc")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/LoadingMenu/CenterContainer/VBoxContainer" unique_id=1955962314]
+layout_mode = 2
+theme_override_constants/margin_top = 25
+
+[node name="LoadingProgressBar" type="ProgressBar" parent="Menu/LoadingMenu/CenterContainer/VBoxContainer/MarginContainer" unique_id=129450571]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(259.82, 0)
+layout_mode = 2
+max_value = 1.0
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=504832954]
-_spawnable_scenes = PackedStringArray("uid://b2qhxdrnviyqf")
+_spawnable_scenes = PackedStringArray("uid://b2qhxdrnviyqf", "uid://bosh48knotfug")
 spawn_path = NodePath("..")
 
 [node name="Map" type="Node" parent="." unique_id=8076072]
 
-[node name="Shipment" parent="Map" unique_id=1969225845 instance=ExtResource("13_2o6r5")]
-
+[connection signal="spawned" from="UserSpawner" to="." method="_on_user_spawner_spawned"]
 [connection signal="toggled" from="Menu/Options/MarginContainer/VBoxContainer/FpsCounter" to="FpsCounter" method="_on_fps_counter_toggled"]
 [connection signal="toggled" from="Menu/Options/MarginContainer/VBoxContainer/Ping" to="FpsCounter" method="_on_ping_toggled"]
 [connection signal="value_changed" from="Menu/Options/MarginContainer/VBoxContainer/HBoxContainer/MouseSensitivity" to="Menu/Options/MarginContainer/VBoxContainer/HBoxContainer/MouseSensitivity" method="_on_value_changed"]
 [connection signal="value_changed" from="Menu/Options/MarginContainer/VBoxContainer/HBoxContainer2/ControllerSensitivity" to="Menu/Options/MarginContainer/VBoxContainer/HBoxContainer2/ControllerSensitivity" method="_on_value_changed"]
-[connection signal="pressed" from="Menu/Options/MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="Menu/Options/MarginContainer/VBoxContainer/Back" to="Menu/PauseMenu/MarginContainer/VBoxContainer/Options" method="_on_back_pressed"]
-[connection signal="pressed" from="Menu/Options/MarginContainer/VBoxContainer/Back" to="Menu/MainMenu/MarginContainer/VBoxContainer/OptionsButton" method="_on_back_pressed"]
-[connection signal="pressed" from="Menu/PauseMenu/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="Menu/PauseMenu/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
-[connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/HBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
-[connection signal="toggled" from="Menu/MainMenu/MarginContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_toggled"]
-[connection signal="toggled" from="Menu/MainMenu/MarginContainer/VBoxContainer/OptionsButton" to="Menu/Options/MarginContainer/VBoxContainer/Fullscreen" method="_on_options_button_toggled"]
-[connection signal="toggled" from="Menu/MainMenu/MusicToggle" to="." method="_on_music_toggle_toggled"]
+[connection signal="pressed" from="Menu/Options/MarginContainer/VBoxContainer/Back" to="Menu" method="_on_options_back_pressed"]
+[connection signal="pressed" from="Menu/PauseMenu/MarginContainer/VBoxContainer/Resume" to="Menu" method="_on_resume_pressed"]
+[connection signal="pressed" from="Menu/PauseMenu/MarginContainer/VBoxContainer/Options" to="Menu" method="_on_pause_options_pressed"]
+[connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/OptionsButton" to="Menu" method="_on_main_menu_options_pressed"]
+[connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/HostButton" to="Menu" method="_on_host_button_pressed"]
+[connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/HBoxContainer/JoinButton" to="Menu" method="_on_join_button_pressed"]
+[connection signal="item_selected" from="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer2/Map" to="Menu/LobbyMenu" method="_on_map_item_selected"]
+[connection signal="item_selected" from="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer2/VBoxContainer2/Mode" to="Menu/LobbyMenu" method="_on_mode_item_selected"]
+[connection signal="value_changed" from="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer2/ScoreTarget" to="Menu/LobbyMenu" method="_score_target_changed"]
+[connection signal="value_changed" from="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VBoxContainer2/RespawnTime" to="Menu/LobbyMenu" method="_respawn_time_changed"]
+[connection signal="pressed" from="Menu/LobbyMenu/HBoxContainer/MarginContainer2/VBoxContainer2/StartButton" to="Menu/LobbyMenu" method="_on_start_match_pressed"]

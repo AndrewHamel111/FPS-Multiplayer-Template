@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="MapLibrary" format=3 uid="uid://cwt88lllupnnl"]
+
+[ext_resource type="Script" uid="uid://d2hoo0lwydwwu" path="res://scripts/map_library_entry.gd" id="1_tb4dv"]
+[ext_resource type="Texture2D" uid="uid://kpu3a8umkw1u" path="res://maps/shipment_preview.png" id="2_fq8w3"]
+[ext_resource type="Script" uid="uid://d0lruqxfnedbg" path="res://scripts/map_library.gd" id="2_sgjjj"]
+[ext_resource type="Texture2D" uid="uid://db4q75h6w36m0" path="res://maps/nuketown_preview.png" id="3_okrfn"]
+
+[sub_resource type="Resource" id="Resource_vdopp"]
+script = ExtResource("1_tb4dv")
+map_resource_path = "res://maps/shipment.tscn"
+map_preview = ExtResource("2_fq8w3")
+metadata/_custom_type_script = "uid://d2hoo0lwydwwu"
+
+[sub_resource type="Resource" id="Resource_fq8w3"]
+script = ExtResource("1_tb4dv")
+map_resource_path = "res://maps/nuketown.tscn"
+map_preview = ExtResource("3_okrfn")
+metadata/_custom_type_script = "uid://d2hoo0lwydwwu"
+
+[resource]
+script = ExtResource("2_sgjjj")
+maps = Dictionary[String, ExtResource("1_tb4dv")]({
+"Nuketown": SubResource("Resource_fq8w3"),
+"Shipment": SubResource("Resource_vdopp")
+})
+metadata/_custom_type_script = "uid://d0lruqxfnedbg"
