@@ -2,9 +2,9 @@ This repo represents an effort to improve the Multiplayer Template which I learn
 
 - [ ] Save User Preferences (sensitivity, whether to use UPNP, other new game options to be added)
 - [ ] Text Based Game Chat
-- [ ] Pre-game Lobby
+- [x] Pre-game Lobby
 - [ ] Controller Improvements (aim assist / aim magnetism)
-- [ ] Server-side Map Loading (host can choose map, clients independently load map)
+- [x] Server-side Map Loading (host can choose map, clients independently load map)
 - [ ] Player Identity
 - [ ] Scoreboard
 - [ ] Basic Weapon Definitions
