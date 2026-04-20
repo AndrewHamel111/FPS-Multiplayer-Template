@@ -135,7 +135,10 @@ func _prepare_client() -> void:
 		current_level = map as Map
 		_on_client_loading_complete()
 	
-	MapLoader.load_map(map_library.maps[map_to_load].map_resource_path, on_complete)
+	var update_progress := func(progress: float) -> void:
+		menu_manager.loading_progress_bar.value = progress
+	
+	MapLoader.load_map(map_library.maps[map_to_load].map_resource_path, on_complete, update_progress)
 
 func _on_client_loading_complete() -> void:
 	_client_finished_loading.rpc_id(1, multiplayer.get_unique_id())

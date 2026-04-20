@@ -17,6 +17,7 @@ signal exit_lobby
 @onready var blur : ColorRect = $Blur
 @onready var lobby : LobbyManager = $LobbyMenu
 @onready var name_entry: LineEdit = $MainMenu/MarginContainer/VBoxContainer/HBoxContainer2/NameEntry
+@onready var loading_progress_bar: ProgressBar = %LoadingProgressBar
 
 var options_opened_from_pause : bool
 
