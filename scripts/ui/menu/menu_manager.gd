@@ -4,7 +4,8 @@ extends CanvasLayer
 signal join_pressed(address: String)
 signal host_pressed
 signal pause_state_changed(is_paused: bool)
-signal exit_lobby
+signal exit_lobby_pressed
+signal toggle_music(value: bool)
 
 @onready var menus : Dictionary[int, PanelContainer] = {
 	Menu.MAIN: $MainMenu,
@@ -48,9 +49,10 @@ func handle_back() -> void:
 	elif is_menu(Menu.PAUSE):
 		_on_resume_pressed()
 	elif is_menu(Menu.LOBBY) or is_menu(Menu.LOADING):
-		exit_lobby.emit()
+		exit_lobby_pressed.emit()
 		show_menu(Menu.MAIN)
 
+# button handlers
 func _on_resume_pressed() -> void:
 	hide_all()
 	pause_state_changed.emit(false)

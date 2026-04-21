@@ -1,7 +1,7 @@
 class_name LobbyManager
 extends PanelContainer
 
-signal start_game
+signal start_game_pressed
 signal setting_changed(setting: String, value: Variant)
 
 @onready var name_scene: PackedScene = load("res://scenes/ui/lobby/name.tscn")
@@ -36,18 +36,18 @@ func _ready() -> void:
 	mode.clear()
 	mode.add_item("Deathmatch")
 
-func disable_control(control: Control, state: bool = false) -> void:
-	if control is SpinBox:
-		(control as SpinBox).editable = state
-	if control is OptionButton:
-		(control as OptionButton).disabled = not state
-
 func set_host_mode(value: bool = true) -> void:
 	for option in host_only_options:
 		disable_control(host_only_options[option], value)
 	
 	start_button.text = "Start Game" if value else "Only Host Can Start Game"
 	start_button.disabled = not value
+
+func disable_control(control: Control, state: bool = false) -> void:
+	if control is SpinBox:
+		(control as SpinBox).editable = state
+	if control is OptionButton:
+		(control as OptionButton).disabled = not state
 
 func set_player_list(players: Array[User]) -> void:
 	for node in player_list.get_children():
@@ -67,8 +67,9 @@ func set_game_rules(game_rules: GameRules) -> void:
 	score_target.value = game_rules.score_target
 	respawn_time.value = game_rules.respawn_time
 
+#  button handlers
 func _on_start_match_pressed() -> void:
-	start_game.emit()
+	start_game_pressed.emit()
 
 func _on_map_item_selected(index: int) -> void:
 	var map_name : String = map_library.maps.keys()[index]
@@ -76,7 +77,7 @@ func _on_map_item_selected(index: int) -> void:
 	selected_map_name.text = map_name
 	selected_map_preview.texture = map_library.maps[map_name].map_preview
 	
-func _on_mode_item_selected(index: int) -> void: 
+func _on_mode_item_selected(_index: int) -> void: 
 	pass # Replace with function body. 
 
 func _score_target_changed(value: float) -> void:
