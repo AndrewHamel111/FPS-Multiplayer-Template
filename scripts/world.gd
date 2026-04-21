@@ -34,9 +34,9 @@ func _ready() -> void:
 	menu_manager.show_menu(Menu.MAIN)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_pressed("pause"):
+	if Input.is_action_just_pressed("pause"):
 		if !paused and menu_manager.is_menu(Menu.NONE):
-			paused = true
+			set_pause(true)
 		else:
 			menu_manager.handle_back()
 	if event is InputEventJoypadMotion:
@@ -48,6 +48,8 @@ func _unhandled_input(event: InputEvent) -> void:
 func set_pause(is_paused: bool) -> void:
 	if !controller and !is_paused:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	elif is_paused:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	paused = is_paused
 	
 	if is_paused:

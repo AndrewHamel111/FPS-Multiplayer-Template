@@ -54,6 +54,7 @@ func handle_back() -> void:
 func _on_resume_pressed() -> void:
 	hide_all()
 	pause_state_changed.emit(false)
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _on_host_button_pressed() -> void:
 	host_pressed.emit()
